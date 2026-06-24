@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useGetOrderByIdQuery, useUpdateOrderStatusMutation } from "../slices/orderSlice";
 import { orderStatusColor } from "../utils/orderStatusColors";
@@ -8,6 +8,11 @@ import Message from "../components/Message";
 import Meta from "../components/Meta";
 import { Edit2, Package, MapPin, CreditCard, ShoppingBag, Clock, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 
 function OrderPage() {
   const { id } = useParams();
@@ -16,6 +21,15 @@ function OrderPage() {
   const { data: order, isLoading, refetch, error } = useGetOrderByIdQuery(id);
   const [updateOrderStatus, { isLoading: updateLoading }] = useUpdateOrderStatusMutation();
   const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: iconRetina,
+      iconUrl: icon,
+      shadowUrl: iconShadow,
+    });
+  }, []);
 
   const updateStatusHandler = async (status) => {
     try {
@@ -92,6 +106,20 @@ function OrderPage() {
                     <span className="text-sm opacity-60 block mb-1">Shipping Address</span>
                     <span className="font-semibold">{order.shippingAddress.address}, {order.shippingAddress.city}</span>
                   </div>
+                  {order.shippingAddress.location && order.shippingAddress.location.lat && (
+                    <div className="md:col-span-2">
+                      <span className="text-sm opacity-60 block mb-2">Map Location</span>
+                      <div className="h-64 w-full rounded-md overflow-hidden border border-base-200 relative z-0">
+                        <MapContainer center={[order.shippingAddress.location.lat, order.shippingAddress.location.lng]} zoom={14} scrollWheelZoom={true} style={{ height: "100%", width: "100%" }}>
+                          <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                          />
+                          <Marker position={[order.shippingAddress.location.lat, order.shippingAddress.location.lng]}></Marker>
+                        </MapContainer>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
                 {order.isDelivered ? (

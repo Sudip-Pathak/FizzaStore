@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAddOrderMutation } from "../slices/orderSlice";
+import { clearCartItems, clearShippingAddress } from "../slices/cartSlice";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Meta from "../components/Meta";
 import { MapPin, Package, CreditCard, ShoppingCart } from "lucide-react";
@@ -12,6 +13,7 @@ function PlaceOrderPage() {
     useSelector((state) => state.cart);
   const [addOrder, { isLoading }] = useAddOrderMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const placeOrderHandler = async () => {
     try {
@@ -22,6 +24,8 @@ function PlaceOrderPage() {
         shippingCharge,
         totalPrice,
       }).unwrap();
+      dispatch(clearCartItems());
+      dispatch(clearShippingAddress());
       navigate("/order/" + resp.orderId);
       toast.success(resp.message || "Order placed successfully!");
     } catch (err) {

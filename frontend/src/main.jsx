@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
+import "leaflet/dist/leaflet.css";
 import HomePage from "./pages/HomePage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import CartPage from "./pages/CartPage.jsx";

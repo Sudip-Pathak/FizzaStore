@@ -25,6 +25,10 @@ const orderSchema = new mongoose.Schema(
       phone: { type: String, required: true },
       address: { type: String, required: true },
       city: { type: String, required: true },
+      location: {
+        lat: { type: Number },
+        lng: { type: Number },
+      },
     },
     itemPrice: {
       type: Number,

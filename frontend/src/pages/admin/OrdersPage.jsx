@@ -37,49 +37,71 @@ const OrdersPage = () => {
         ) : error ? (
           <Message variant="error">{error?.data?.error || "Error loading orders"}</Message>
         ) : (
-          <div className="bg-white border border-base-200 rounded-sm shadow-sm overflow-hidden">
+          <div className="bg-white border border-base-200 rounded-lg shadow-md overflow-hidden mt-6">
             <div className="overflow-x-auto">
-              <table className="table table-sm w-full">
+              <table className="table table-md w-full">
                 <thead>
-                  <tr className="bg-base-100 text-gray-600 text-xs uppercase tracking-wider border-b border-base-200">
-                    <th className="font-semibold py-3">Order ID</th>
-                    <th className="font-semibold">Customer</th>
-                    <th className="font-semibold">Date</th>
-                    <th className="font-semibold">Total</th>
-                    <th className="font-semibold text-center">Paid</th>
-                    <th className="font-semibold text-center">Delivered</th>
-                    <th></th>
+                  <tr className="bg-base-200/50 text-gray-700 text-sm uppercase tracking-wider border-b border-base-300">
+                    <th className="font-semibold py-4 px-6">Order ID</th>
+                    <th className="font-semibold py-4">Customer</th>
+                    <th className="font-semibold py-4">Date & Time</th>
+                    <th className="font-semibold py-4">Total</th>
+                    <th className="font-semibold py-4 text-center">Payment Status</th>
+                    <th className="font-semibold py-4 text-center">Delivery Status</th>
+                    <th className="py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {orders.map((order) => (
-                    <tr key={order._id} className="border-t border-base-200 hover:bg-base-100 transition-colors">
-                      <td className="font-mono text-xs text-gray-500 py-3">
-                        {order._id.slice(-10).toUpperCase()}
+                    <tr key={order._id} className="border-t border-base-200 hover:bg-base-100/50 transition-colors">
+                      <td className="font-mono text-sm text-gray-600 py-4 px-6">
+                        <span className="bg-base-200 px-2 py-1 rounded-md">#{order._id.slice(-8).toUpperCase()}</span>
                       </td>
-                      <td className="font-medium text-sm text-gray-700">{order.user?.name || "N/A"}</td>
-                      <td className="text-sm text-gray-600">{order.createdAt.substring(0, 10)}</td>
-                      <td className="font-bold text-primary">${order.totalPrice}</td>
-                      <td className="text-center">
+                      <td className="font-semibold text-gray-800 py-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                            {(order.user?.name || "N")[0].toUpperCase()}
+                          </div>
+                          {order.user?.name || "N/A"}
+                        </div>
+                      </td>
+                      <td className="text-sm text-gray-600 py-4">
+                        <div className="font-medium text-gray-800">
+                          {new Date(order.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                        </div>
+                        <div className="text-xs opacity-70">
+                          {new Date(order.createdAt).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                      </td>
+                      <td className="font-bold text-primary text-base py-4">${order.totalPrice.toFixed(2)}</td>
+                      <td className="text-center py-4">
                         {order.isPaid ? (
-                          <CheckCircle size={18} className="text-success mx-auto" />
+                          <div className="badge badge-success gap-1 py-3 px-3 shadow-sm border-none bg-success/10 text-success font-semibold">
+                            <CheckCircle size={14} /> Paid
+                          </div>
                         ) : (
-                          <XCircle size={18} className="text-error mx-auto" />
+                          <div className="badge badge-error gap-1 py-3 px-3 shadow-sm border-none bg-error/10 text-error font-semibold">
+                            <XCircle size={14} /> Pending
+                          </div>
                         )}
                       </td>
-                      <td className="text-center">
+                      <td className="text-center py-4">
                         {order.isDelivered ? (
-                          <CheckCircle size={18} className="text-success mx-auto" />
+                          <div className="badge badge-success gap-1 py-3 px-3 shadow-sm border-none bg-success/10 text-success font-semibold">
+                            <CheckCircle size={14} /> Delivered
+                          </div>
                         ) : (
-                          <XCircle size={18} className="text-error mx-auto" />
+                          <div className="badge badge-warning gap-1 py-3 px-3 shadow-sm border-none bg-warning/10 text-warning-content font-semibold">
+                            <XCircle size={14} /> Pending
+                          </div>
                         )}
                       </td>
-                      <td>
+                      <td className="py-4 text-right pr-6">
                         <Link
                           to={`/order/${order._id}`}
-                          className="btn btn-xs rounded-sm btn-outline border-primary text-primary hover:bg-primary hover:text-white flex items-center gap-1"
+                          className="btn btn-sm rounded-md btn-outline border-primary text-primary hover:bg-primary hover:text-white flex items-center gap-1 shadow-sm"
                         >
-                          View <ChevronRight size={12} />
+                          View Details <ChevronRight size={14} />
                         </Link>
                       </td>
                     </tr>
@@ -87,8 +109,9 @@ const OrdersPage = () => {
                 </tbody>
               </table>
             </div>
-            <div className="p-4 border-t border-base-200 text-sm text-gray-500">
-              Total: <span className="font-bold text-gray-700">{orders?.length || 0}</span> orders
+            <div className="bg-base-200/30 p-5 border-t border-base-200 flex justify-between items-center text-sm text-gray-600">
+              <span>Showing all orders in the system</span>
+              <span className="font-medium">Total Orders: <span className="font-bold text-primary text-base ml-1">{orders?.length || 0}</span></span>
             </div>
           </div>
         )}
