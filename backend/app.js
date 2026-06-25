@@ -41,6 +41,11 @@ app.use("/api/v1/promo", promoRouter);
 app.use("/api/v1/chat", chatRouter);
 app.use("/api/v1/demands", demandRouter);
 
+// Health check route for Render
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "success", message: "FizzaStore API is running!" });
+});
+
 // Error handlers
 app.use(notFoundHandler);
 app.use(errorHandler);
