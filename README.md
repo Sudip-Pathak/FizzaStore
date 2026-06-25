@@ -1,65 +1,127 @@
-# Project Title : Ecommerce Website
+# FizzaStore 🛒
 
-A brief description of your project.: This project is based on the ecommerce platform like daraz but in the samll scale. It is made up by employing the programming language called JavaScript. It uses the framework like Express, Node, React with MongoDB as database know as MERN Stack.
+FizzaStore is a modern, full-stack e-commerce platform built with the MERN stack (MongoDB, Express.js, React, Node.js). It features a Daraz-inspired frontend architecture with advanced AI capabilities, including built-in smart AI assistants (Gemini and Groq) to help users navigate, find products, and log specific product demands.
 
-# Backend
+---
 
-## Installation
+## 🚀 Tech Stack
 
-Instructions on how to install and set up the project. : To install and use the project follow the given steps below:
+### **Frontend**
+- **Framework:** React.js (Bootstrapped with Vite)
+- **State Management:** Redux Toolkit (`@reduxjs/toolkit`, `react-redux`)
+- **Styling:** Tailwind CSS, DaisyUI
+- **Routing:** React Router DOM
+- **HTTP Client:** Axios
+- **UI Enhancements:** Framer Motion (Animations), Lucide React (Icons), React Toastify / Sonner (Notifications)
+- **SEO/Document Head:** React Helmet Async
 
-1. npm i express mongoose = installation of express framework and MongoDB data base package.
-2. npm i - D nodemon / npm i nodemon -D = install required dependies. Here -D indicates dev dependencies.
-3. npm run server = It helps to run the original application (Simply Application Server)
-4. npm i bcryptjs = used for running the hashsed password and also can be added as salt and install bcrypt package.
-5. npm i colors = to see the methodwise error in terminal and install color package.
-6. npm i jsonwebtoken = used to install JSON web token in the project.
-7. npm i cookie-parser = to read we need cookie parser. So we installed this package.
-8. npm i dotenv = to load Env File we can install this package of have code process.loadEnvFile();
-9. npm run data:load/ = to load data from the made script in the mongoDB.
-10. npm run data:destroy = to delete data from the made script in the mongoDB.
-11. npm i express body-parser = to install the express body parser.
-12. npm i update@latest = to upadate the package into the lastest supported version.
+### **Backend**
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (via Mongoose ODM)
+- **Authentication:** JSON Web Tokens (JWT) & BcryptJS (Password Hashing)
+- **File Uploads:** Multer (Local Image Uploads)
+- **Email Service:** Nodemailer
+- **AI Integrations:** 
+  - `@google/generative-ai` (Gemini-2.5-Flash)
+  - `groq-sdk` (Llama-3.1-8b-Instant)
 
-# Frontend
+### **Dev Tools**
+- **Concurrently:** For running both backend and frontend servers simultaneously.
+- **Nodemon:** For automatic backend server restarts during development.
 
-## Installation
+---
 
-1. npm create vite@latest frontend = Initializating the react project using vite.
-2. npx create-react-app reactapp01 = creating the project using the react app not the vite app.
-3. npm install - to install the required dependencies
-4. npm run dev - to run the server and frontend project. Bring in the root file frontend server can be run by <<npm run client>>.
-5. npm i bootstrap react-icons react-bootstrap = install the bootstap, react relating bootstrap and icons.
-6. npm i react-router-dom = for importing the router package required for routing.
-7. rafce (in coding) = generates boilarplate as per the file name after installing react snippet.
-8. npm i axios = package of setting route (to connecet frontend and backend using api) or use fetch api.
-9. npm i react-toastify = package used to add pop up notification with icons.
-10. npm i react-router-bootstrap = It provides a simple way to integrate React Router with React-Bootstrap components. It allows you to use React Router's Link and NavLink components with React-Bootstrap's UI components seamlessly. Essentially, it wraps Bootstrap components and enhances them with routing capabilities, enabling easier navigation within a React application that uses Bootstrap for its UI styling.
-11. npm i react-helmet-async = component which lets you control your document head using their React component. With this plugin, attributes you add in their component, e.g. title, meta attributes, etc. will get added to the static HTML pages Gatsby builds.
+## ⚙️ Prerequisites
 
-<<<<<< Redux for this frontend part>>>>>>
+Before you begin, ensure you have the following installed on your local machine:
+- [Node.js](https://nodejs.org/en/) (v18 or higher recommended)
+- [MongoDB](https://www.mongodb.com/) (Local instance or MongoDB Atlas cluster)
+- API Keys for Google AI Studio (Gemini) and Groq.
 
-1. npm i @reduxjs/toolkit = install the redux tool kit, wholly redux configuration.
-2. npm i react-redux = isntall the redux tools kit, means which is configured to wrap that in the react and supply in the component we use this command.
+---
 
-<<<<<< To uploade the image >>>>>>
+## 🛠️ Installation & Setup
 
-1. npm i multer = this package is used to upload image on the express.js/node.js.
+Follow these steps to get your development environment set up:
 
-<<<<<< Server for the both backend and fronted can be started by the singel script. >>>>>>
+**1. Clone the repository**
+```bash
+git clone https://github.com/Sudip-Pathak/FizzaStore.git
+cd FizzaStore
+```
 
-1. npm i -D concurrently = It starts multiple npm script at the same time. It is installed on the root folder.
-2. setting done in package.json: "dev": "concurrently \"npm run server\" \"npm run client\""
-   Now run both server at once: <<npm run dev>>
+**2. Install Root & Backend Dependencies**
+```bash
+npm install
+```
 
-## Usage
+**3. Install Frontend Dependencies**
+```bash
+cd frontend
+npm install
+cd ..
+```
 
-Examples of how to use the project. : Use the project as a ecommerce business portal.
+**4. Environment Variables Setup**
+Create a `.env` file in the root directory (you can use `.env.sample` as a reference if available) and add the following configurations:
 
-## Contributing
+```env
+# Database & Server
+PORT=5051
+MONGODB_URI=your_mongodb_connection_string
 
-Guidelines for contributing to the project. : Make the branch and push while working in the project.
+# Authentication
+JWT_SECRET=your_jwt_secret_key
 
-## License
+# Email Automation (Nodemailer)
+GMAIL_USER=your_gmail_address
+GMAIL_PASS=your_gmail_app_password
 
-Information about the project's license. It has MIT lisence.
+# AI Assistants
+GEMINI_API_KEY=your_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+---
+
+## 💻 Running the Project
+
+### Database Seeding
+To populate your database with initial sample data (products, users), run:
+```bash
+npm run data:load
+```
+*Note: To destroy/clear the sample data, run `npm run data:destroy`*
+
+### Start Development Servers
+You can run both the Node backend server and the Vite frontend server simultaneously with a single command:
+```bash
+npm run dev
+```
+- The backend API will run on `http://localhost:5051` (or your defined PORT).
+- The frontend client will run on `http://localhost:5173` (or the nearest available port allocated by Vite).
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions to FizzaStore! Follow these steps to contribute:
+
+1. **Fork the repository** on GitHub.
+2. **Clone your fork** locally: `git clone https://github.com/your-username/FizzaStore.git`
+3. **Create a new branch** for your feature or bug fix: `git checkout -b feature/your-feature-name`
+4. **Make your changes** and commit them with descriptive messages.
+5. **Push your branch** to your fork: `git push origin feature/your-feature-name`
+6. **Open a Pull Request** to the `main` branch of the original repository.
+
+### Development Guidelines:
+- Ensure your code follows the existing style patterns (using Tailwind/DaisyUI for frontend components).
+- Do not modify existing core backend routes unless resolving a specific issue.
+- Test your changes locally before submitting a PR.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
