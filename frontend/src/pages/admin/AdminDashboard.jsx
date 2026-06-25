@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   FaBoxOpen, FaClipboardList, FaUserPlus,
-  FaEdit, FaFileExcel, FaFileCode
+  FaEdit, FaFileExcel, FaFileCode, FaCommentDots
 } from "react-icons/fa";
 import { ArrowRight } from "lucide-react";
 import Meta from "../../components/Meta";
@@ -55,6 +55,14 @@ const adminCards = [
     link: "/admin/upload-data",
     label: "Upload .json",
     color: "border-l-purple-500",
+  },
+  {
+    icon: <FaCommentDots size={32} className="text-rose-500" />,
+    title: "Product Demands",
+    description: "View products requested by customers via the AI chatbot.",
+    link: "/admin/demands",
+    label: "View Demands",
+    color: "border-l-rose-500",
   },
 ];
 

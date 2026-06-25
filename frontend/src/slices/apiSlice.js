@@ -16,6 +16,6 @@ const baseQuery = fetchBaseQuery({
 export const apiSlice = createApi({
   // // Creating api slice.
   baseQuery,
-  tagTypes: ["Product", "User", "Order"], // // Used for caching the data so that in future data need not have to be reloaded.
+  tagTypes: ["Product", "User", "Order", "Demand"],
   endpoints: (builder) => ({}),
 });

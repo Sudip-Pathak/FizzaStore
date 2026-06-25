@@ -7,3 +7,5 @@ connectDB().then(() => {
     console.log(`Server is up and running at port ${PORT}.`)
   );
 });
+
+

@@ -11,6 +11,8 @@ import productRouter from "./routes/product.router.js";
 import orderRouter from "./routes/order.router.js";
 import uploadRouter from "./routes/upload.router.js";
 import promoRouter from "./routes/promo.router.js";
+import chatRouter from "./routes/chat.router.js";
+import demandRouter from "./routes/demand.router.js";
 
 // Initialize express app
 const app = express();
@@ -30,6 +32,8 @@ app.use("/api/v1/products", productRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/image", uploadRouter);
 app.use("/api/v1/promo", promoRouter);
+app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/demands", demandRouter);
 
 // Error handlers
 app.use(notFoundHandler);

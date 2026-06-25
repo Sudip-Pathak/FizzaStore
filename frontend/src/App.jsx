@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import { Toaster } from "sonner";
 import { Outlet } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import Chatbot from "./components/Chatbot";
+import GroqChatbot from "./components/GroqChatbot";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Outlet />
       </main>
       <Footer />
+      <Chatbot />
+      <GroqChatbot />
       <Toaster richColors position="top-right" />
     </div>
   );

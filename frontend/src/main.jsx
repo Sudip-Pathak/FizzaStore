@@ -32,6 +32,7 @@ import BulkProductUpdatePage from "./pages/admin/BulkProductUpdatePage.jsx";
 import DataUploadPage from "./pages/admin/DataUploadPage.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import CreateAdminPage from "./pages/admin/CreateAdminPage.jsx";
+import AdminDemandsPage from "./pages/admin/AdminDemandsPage.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
 
@@ -68,6 +69,7 @@ const router = createBrowserRouter(
           element={<ProductsListPage />}
         />
         <Route path="admin/product/:id/edit" element={<ProductEditPage />} />
+        <Route path="admin/demands" element={<AdminDemandsPage />} />
       </Route>
     </Route>
   )
