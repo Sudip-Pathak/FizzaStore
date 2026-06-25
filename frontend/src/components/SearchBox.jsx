@@ -19,17 +19,36 @@ function SearchBox() {
       <div className="join w-full">
         <input
           type="text"
-          placeholder="Search in FizzaStore"
-          className="input input-bordered join-item w-full rounded-sm bg-base-200 focus:bg-white focus:outline-none focus:border-primary"
+          placeholder="Search in FizzaStore..."
+          className="fizza-search join-item w-full input input-bordered rounded-l-xl border-r-0 focus:outline-none text-sm"
+          style={{
+            background: "rgba(255,255,255,0.12)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            color: "white",
+            backdropFilter: "blur(8px)",
+          }}
+          onFocus={e => {
+            e.target.style.background = "rgba(255,255,255,0.95)";
+            e.target.style.color = "#1E1B18";
+            e.target.style.border = "1px solid #FF6B35";
+          }}
+          onBlur={e => {
+            if (!e.target.value) {
+              e.target.style.background = "rgba(255,255,255,0.12)";
+              e.target.style.color = "white";
+              e.target.style.border = "1px solid rgba(255,255,255,0.25)";
+            }
+          }}
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <button 
-          type="submit" 
-          className="btn btn-primary join-item rounded-sm text-white px-6"
+        <button
+          type="submit"
+          className="btn join-item rounded-r-xl px-5 text-white border-none hover:brightness-110 transition-all"
+          style={{ backgroundColor: "#FF6B35" }}
           aria-label="Search"
         >
-          <Search size={20} />
+          <Search size={18} />
         </button>
       </div>
     </form>

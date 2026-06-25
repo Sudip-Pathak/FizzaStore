@@ -34,6 +34,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import CreateAdminPage from "./pages/admin/CreateAdminPage.jsx";
 import AdminDemandsPage from "./pages/admin/AdminDemandsPage.jsx";
 import { HelmetProvider } from "react-helmet-async";
+import ContactPage from "./pages/ContactPage.jsx";
+import FAQPage from "./pages/FAQPage.jsx";
+import ReturnPolicyPage from "./pages/ReturnPolicyPage.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
+import FlashSalePage from "./pages/FlashSalePage.jsx";
 
 
 const router = createBrowserRouter(
@@ -51,6 +56,11 @@ const router = createBrowserRouter(
       <Route path="register" element={<RegisterPage />} />
       <Route path="premium" element={<PremiumPage />} />
       <Route path="premium/checkout" element={<PremiumCheckoutPage />} />
+      <Route path="contact" element={<ContactPage />} />
+      <Route path="faq" element={<FAQPage />} />
+      <Route path="returns" element={<ReturnPolicyPage />} />
+      <Route path="categories" element={<CategoriesPage />} />
+      <Route path="flash-sale" element={<FlashSalePage />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="shipping" element={<ShippingPage />} />
         <Route path="profile" element={<ProfilePage />} />
